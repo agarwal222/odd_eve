@@ -116,12 +116,14 @@ function stp_2(){
     }
     document.querySelector('.win_ch').classList.toggle("inner");
     if (wl_f == 0) {
-        var pc_c = Math.floor(Math.random()*2);
-        console.log(pc_c);
-        play_cir(pc_c);
-        document.querySelector('.win_ch').style.display = "none";
-        document.querySelector('.won').style.display = "none";
-    }
+            setTimeout(() => {
+                var pc_c = Math.floor(Math.random()*2);
+                console.log(pc_c);
+                play_cir(pc_c);
+                document.querySelector('.win_ch').style.display = "none";
+                document.querySelector('.won').style.display = "none";
+            }, 1000);
+        }
 }
 
 function play_cir(sl){
@@ -254,12 +256,14 @@ function win_ch(){
         if (ap == 0) {
             if (p2s > p1s) {
                 document.getElementById('won').innerHTML = "PC WON";
+                stat.style.display = "none";
                 win_st = 1;
                 dsb_num();
             }
         }else if(ap == 1){
             if (p1s > p2s) {
                 document.getElementById('won').innerHTML = "YOU WON";
+                stat.style.display = "none";
                 win_st = 1;
                 dsb_num();
             }
