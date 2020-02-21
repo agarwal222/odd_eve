@@ -108,7 +108,7 @@
     display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto;
-    grid-gap: 1vw;
+    grid-gap: 2vw;
     align-content: center;
     justify-content: center;
 }
@@ -134,8 +134,8 @@
 
 .num{
     font-size: 2rem;
-    padding-left: 4vw;
-    padding-right: 4vw;
+    padding-left: 6vw;
+    padding-right: 6vw;
     padding-bottom: 2vh;
     padding-top: 2vh;
     background-color: white;
@@ -162,6 +162,20 @@
     box-shadow: 0 9px 16px #A942D4;
     cursor: pointer;
 }
+
+.btnn_ng{
+    width: 15rem;
+    height: 4.5rem;
+    font-size: 2em;
+    border-radius: 30px;
+    border: none;
+    background-color: #A942D4;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 9px 16px #A942D4;
+    cursor: pointer;
+}
+
 
 .btnn:hover{
     background-color: rgb(151, 59, 190);

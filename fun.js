@@ -2,6 +2,7 @@ var choice,c,wl_f,p1s=-1,p2s=-1,ran,amp=0,ap,blc=1,win_st=0;
 var clsn = document.getElementsByClassName("num");
 var stat = document.getElementById('my_ch');
 
+
 var abc = function(a){
     c = parseInt(a, 10);
  }
@@ -17,14 +18,26 @@ function dsb_num(){
         clsn[i].disabled = true;
     }
 }
+
+document.getElementById('btnn_ng').addEventListener("click", () => {
+    p1s = -1;
+    p2s = -1;
+    amp = 0;
+    blc = 1;
+    enb_num();
+    document.getElementById('btnn_ng').style.display = "none";
+    document.getElementById('won').style.display = "none";
+    document.getElementById('win_ch').style.display = "none";
+    document.querySelector('.in_hed').style.display = "grid";
+    var a = document.querySelector('.pnl-2');
+    var b = document.querySelector('.pnl-2');
+    toggler(a,b);
+});
  
-document.querySelector('.btnn').addEventListener("click", function(){
-    document.querySelector('.pnl-1').classList.toggle("fader");
-    setTimeout(() => {
-        document.querySelector('.pnl-1').style.display = 'none';
-        document.querySelector('.pnl-2').style.display = 'grid';
-    }, 500);
-    document.querySelector('.pnl-2').classList.toggle("inner");
+document.querySelector('.btnn').addEventListener("click", () => {
+    var a = document.querySelector('.pnl-1');
+    var b = document.querySelector('.pnl-2');
+    toggler(a,b);
 });
 
 document.getElementById('btnn_o').addEventListener("click", () => {
@@ -55,14 +68,24 @@ document.getElementById('boll').addEventListener("click", () => {
     play_cir(pl_c);
 });
 
-function play (ch){
-    document.querySelector('.pnl-2').classList.toggle("fader");
+function toggler(ele_1,ele_2){
+    ele_1.classList.remove("inner");
+    ele_1.classList.remove("fader");
+    ele_2.classList.remove("inner");
+    ele_2.classList.remove("fader");
+    ele_1.classList.toggle("fader");
     setTimeout(() => {
-        document.querySelector('.pnl-2').style.display = 'none';
-        document.querySelector('.pnl-3').style.display = 'grid';
+        ele_1.style.display = 'none';
+        ele_2.style.display = 'grid';
     }, 500);
-    document.querySelector('.pnl-3').classList.toggle("inner");
+    ele_2.classList.toggle("inner");
+}
+
+function play (ch){
     document.getElementById('my_ch').innerHTML = "YOU CHOOSE "+ ch;
+    var a = document.querySelector('.pnl-2');
+    var b = document.querySelector('.pnl-3');
+    toggler(a,b);
 }
 
 for (i = 0; i < clsn.length; i++){
@@ -233,9 +256,11 @@ function game(){
     }else{
         if (p1s > p2s) {
             document.getElementById('won').innerHTML = "YOU WON";
+            stat.style.display = "none";
             dsb_num();
         }else if (p2s > p1s) {
             document.getElementById('won').innerHTML = "PC WON";
+            stat.style.display = "none";
             dsb_num();
         }
     }
