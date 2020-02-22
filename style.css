@@ -21,7 +21,7 @@
 
 .pnl-3{
     display: none;
-    grid-template-rows: 20%
+    grid-template-rows: 15%
      55% 25%;
      height: 100vh;
 }
@@ -38,6 +38,12 @@
 .play_btn{
     grid-area: 2/1/3/2;
     display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.new{
+    display: none;
     align-content: center;
     justify-content: center;
 }
@@ -62,19 +68,35 @@
     grid-area: 1/1/2/2;
     display: grid;
     grid-template-columns: auto auto;
+    border-bottom: 5px solid rgb(243, 102, 121);
     background-color: rgb(240, 240, 240);
+    color: rgb(243, 102, 121);
 }
 
-.hed{
+.hedp{
     display: grid;
     justify-content: center;
     text-align: center;
-    font-size: 5vh;
+    font-size: 4vh;
+    color: rgb(243, 102, 121);
+}
+
+.hedc{
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    font-size: 4vh;
+    color: rgb(243, 102, 121);
+}
+
+.active{
+    background-color: rgb(243, 102, 121);
+    color: white;
+    font-style: bold;
 }
 
 .in_hed{
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(243, 102, 121);
 }
 
 #my_ch{
@@ -94,7 +116,6 @@
 
 .sc_hed{
     font-family: Arial, Helvetica, sans-serif;
-    color: rgb(243, 102, 121);
 }
 
 .main{
@@ -178,6 +199,13 @@
 
 
 .btnn:hover{
+    background-color: rgb(151, 59, 190);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0 9px 16px rgb(151, 59, 190);
+}
+
+.btnn_ng:hover{
     background-color: rgb(151, 59, 190);
     color: white;
     font-family: Arial, Helvetica, sans-serif;

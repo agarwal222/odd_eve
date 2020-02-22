@@ -1,37 +1,30 @@
+// Global Variable Handling 
 var choice,c,wl_f,p1s=-1,p2s=-1,ran,amp=0,ap,blc=1,win_st=0;
 var clsn = document.getElementsByClassName("num");
 var stat = document.getElementById('my_ch');
 
+eventToggle('add')(odd_eve); // adding event to num (for odd and even tos)
 
-var abc = function(a){
-    c = parseInt(a, 10);
- }
-
-function enb_num(){
-    for (i = 0; i < clsn.length; i++){
-        clsn[i].disabled = false;
-    }
-}
-
-function dsb_num(){
-    for (i = 0; i < clsn.length; i++){
-        clsn[i].disabled = true;
-    }
-}
+//Event Handling
 
 document.getElementById('btnn_ng').addEventListener("click", () => {
     p1s = -1;
     p2s = -1;
     amp = 0;
     blc = 1;
+    win_st = 0;
     enb_num();
-    document.getElementById('btnn_ng').style.display = "none";
-    document.getElementById('won').style.display = "none";
-    document.getElementById('win_ch').style.display = "none";
-    document.querySelector('.in_hed').style.display = "grid";
     var a = document.querySelector('.pnl-2');
     var b = document.querySelector('.pnl-2');
     toggler(a,b);
+    document.getElementById('new').style.display = "none";
+    document.getElementById('won').style.display = "none";
+    document.getElementById('win_ch').style.display = "none";
+    document.getElementById('my_ch').style.display = "grid";
+    document.getElementById("scrc").innerHTML = "?";
+    document.getElementById("scrp").innerHTML = "?";
+    eventToggle('remove')(game);
+    eventToggle('add')(odd_eve);
 });
  
 document.querySelector('.btnn').addEventListener("click", () => {
@@ -68,6 +61,45 @@ document.getElementById('boll').addEventListener("click", () => {
     play_cir(pl_c);
 });
 
+/*for (i = 0; i < clsn.length; i++){
+    // Changing the click event of num buttons
+    clsn[i].addEventListener("click", odd_eve);
+}*/
+
+//Function Definations
+
+var abc = function(a){
+    c = parseInt(a, 10);
+ }
+
+function enb_num(){
+    for (i = 0; i < clsn.length; i++){
+        clsn[i].disabled = false;
+    }
+}
+
+function dsb_num(){
+    for (i = 0; i < clsn.length; i++){
+        clsn[i].disabled = true;
+    }
+}
+
+function eventToggle(addOrRemove){
+    if(addOrRemove == "add"){
+        return function (addName){
+            for (i = 0; i < clsn.length; i++){
+                clsn[i].addEventListener("click", addName);
+            }
+        }
+    }else if (addOrRemove == "remove") {
+        return function (remName){
+            for (i = 0; i < clsn.length; i++){
+                clsn[i].removeEventListener("click", remName);
+            }
+        }
+    }
+}
+
 function toggler(ele_1,ele_2){
     ele_1.classList.remove("inner");
     ele_1.classList.remove("fader");
@@ -81,15 +113,17 @@ function toggler(ele_1,ele_2){
     ele_2.classList.toggle("inner");
 }
 
+function togglerActiveClass(ele_1,ele_2){
+    ele_1.classList.remove("active");
+    ele_2.classList.remove("active");
+    ele_1.classList.toggle("active");
+}
+
 function play (ch){
     document.getElementById('my_ch').innerHTML = "YOU CHOOSE "+ ch;
     var a = document.querySelector('.pnl-2');
     var b = document.querySelector('.pnl-3');
     toggler(a,b);
-}
-
-for (i = 0; i < clsn.length; i++){
-    clsn[i].addEventListener("click", odd_eve);
 }
 
 function odd_eve(){
@@ -104,38 +138,42 @@ function odd_eve(){
     if (z%2 === 0 && choice === "EVEN") {
         z = 0;
         wl_f = 1;
+        sts.style.display = "block";
         sts.innerHTML = "YOU WON";
         stp_2();
         document.querySelector('.win_ch').style.display = "block";
     }else if (z%2 === 0 && choice === "ODD") {
         z = 0;
         wl_f = 0;
+        sts.style.display = "block";
         sts.innerHTML = "YOU LOST";
         stp_2();
     } else if (z%2 !== 0 && choice === "ODD") {
         z = 0;
         wl_f = 1;
+        sts.style.display = "block";
         sts.innerHTML = "YOU WON";
         stp_2();
         document.querySelector('.win_ch').style.display = "block";
     } else {
         z = 0;
         wl_f = 0;
+        sts.style.display = "block";
         sts.innerHTML = "YOU LOST";
         stp_2();
     }
 }
 
 function stp_2(){
-    for (i = 0; i < clsn.length; i++){
-        if(wl_f == 1){
+    if(wl_f == 1){
+        for (i = 0; i < clsn.length; i++){
             clsn[i].disabled = true;
-            clsn[i].removeEventListener("click", odd_eve);
-            clsn[i].addEventListener("click", game);
-        }else{
-            clsn[i].removeEventListener("click", odd_eve);
-            clsn[i].addEventListener("click", game);
         }
+        eventToggle('remove')(odd_eve);
+        eventToggle('add')(game);
+    }else{
+        eventToggle('remove')(odd_eve);
+        eventToggle('add')(game);
     }
     document.querySelector('.win_ch').classList.toggle("inner");
     if (wl_f == 0) {
@@ -184,6 +222,9 @@ function game(){
     if (amp < 2) {
         if (ap == 1 && win_st == 0) {
             enb_num();
+            var a = document.querySelector('.hedp');
+            var b = document.querySelector('.hedc');
+            togglerActiveClass(a,b);
             if(p2s > -1){
                 document.getElementById("scrc").innerHTML = p2s;
             }else if(p2s == -1){
@@ -219,6 +260,9 @@ function game(){
             }
             blc++;
         }else if (ap == 0 && win_st == 0) {
+            var a = document.querySelector('.hedc');
+            var b = document.querySelector('.hedp');
+            togglerActiveClass(a,b);
             enb_num();
             if (blc == 1) {
                 ran = 0;
@@ -257,10 +301,12 @@ function game(){
         if (p1s > p2s) {
             document.getElementById('won').innerHTML = "YOU WON";
             stat.style.display = "none";
+            document.getElementById('new').style.display = "grid";
             dsb_num();
         }else if (p2s > p1s) {
             document.getElementById('won').innerHTML = "PC WON";
             stat.style.display = "none";
+            document.getElementById('new').style.display = "grid";
             dsb_num();
         }
     }
@@ -284,6 +330,7 @@ function win_ch(){
                 stat.style.display = "none";
                 win_st = 1;
                 dsb_num();
+                document.getElementById('new').style.display = "grid";
             }
         }else if(ap == 1){
             if (p1s > p2s) {
@@ -291,6 +338,7 @@ function win_ch(){
                 stat.style.display = "none";
                 win_st = 1;
                 dsb_num();
+                document.getElementById('new').style.display = "grid";
             }
         }
     }
