@@ -310,6 +310,11 @@ function game(){
             stat.style.display = "none";
             document.getElementById('new').style.display = "grid";
             dsb_num();
+        }else if (p2s == p1s) {
+            document.getElementById('won').innerHTML = "DRAW";
+            stat.style.display = "none";
+            document.getElementById('new').style.display = "grid";
+            dsb_num();
         }
     }
 }
