@@ -21,6 +21,8 @@ document.getElementById('btnn_ng').addEventListener("click", () => {
     document.getElementById('won').style.display = "none";
     document.getElementById('win_ch').style.display = "none";
     document.getElementById('my_ch').style.display = "grid";
+    document.querySelector('.hedp').classList.remove("active");
+    document.querySelector('.hedc').classList.remove("active");
     document.getElementById("scrc").innerHTML = "?";
     document.getElementById("scrp").innerHTML = "?";
     eventToggle('remove')(game);
